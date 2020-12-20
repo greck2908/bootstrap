@@ -1,17 +1,16 @@
 module.exports = {
   presets: [
     [
-      '@babel/preset-env',
+      '@babel/env',
       {
         loose: true,
-        bugfixes: true,
-        modules: false
+        modules: false,
+        exclude: ['transform-typeof-symbol']
       }
     ]
   ],
-  env: {
-    test: {
-      plugins: [ 'istanbul' ]
-    }
-  }
+  plugins: [
+    process.env.PLUGINS && 'transform-es2015-modules-strip',
+    '@babel/proposal-object-rest-spread'
+  ].filter(Boolean)
 };
